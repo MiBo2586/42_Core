@@ -1,29 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_memmove.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mborovka <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 14:26:59 by mborovka          #+#    #+#             */
-/*   Updated: 2024/05/20 14:27:05 by mborovka         ###   ########.fr       */
+/*   Created: 2024/05/20 14:23:46 by mborovka          #+#    #+#             */
+/*   Updated: 2024/05/20 14:23:48 by mborovka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include <stdio.h>
 
-int ft_isdigit(int c)
+void *ft_memmove(void *dest, const void *src, size_t n)
 {
-    if (c >= '0' && c <= '9')
-        return(1);
-    else
-        return(0);
+    
 }
-
-/*
-int main (void)
-{
-    char a;
-
-    a = '-';
-    return(ft_isdigit(a));
-}
-*/

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                         :+:      :+:    :+:   */
+/*   ft_strncmp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mborovka <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -9,36 +9,39 @@
 /*   Updated: 2024/05/20 14:23:48 by mborovka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include <stdio.h>
+#include <unistd.h>
 #include <string.h>
-void *ft_memcpy(void *dest, const void *src, size_t n)
+
+int ft_strncmp(const char *s1, const char *s2, size_t n)
 {
     size_t i;
-    unsigned char *s;
-    unsigned char *d;
+    size_t c;
 
     i = 0;
-    s = ( unsigned char *) src;
-    d = (unsigned char *) dest;
-    
-    if (!dest && !src)
-        return(0);
-    while (n > i)
+    while (*s1 && *s2 && i <= n)
     {
-        d[i] = s[i];
+        if (*s1 != *s2)
+        {   
+            c = *s1 - *s2;  
+            return(c);
+        }
+        s1++;
+        s2++;
         i++;
     }
-    return (d);
+    return(0);
 }
 /*
 int main (void)
 {
-    char dest [20] = "ydar";
-    char src [8] = "abcdefgh";
-    int n = 5;
+    int n;
 
-    printf("%s\n", (unsigned char *) ft_memcpy(&src[0], &src[1], n));
-    return (0);
+    char *x = "ABCC";
+    char *z = "ABCc";
+    n = 6;
+    printf("%d\n", ft_strncmp(x, z, n));
+    return(0);
 }
 */
-

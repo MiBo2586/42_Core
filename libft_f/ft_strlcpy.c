@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                         :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mborovka <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -9,36 +9,47 @@
 /*   Updated: 2024/05/20 14:23:48 by mborovka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdio.h>
 #include <string.h>
-void *ft_memcpy(void *dest, const void *src, size_t n)
+#include <stdio.h>
+
+int ft_strlen(const char *s)
 {
-    size_t i;
-    unsigned char *s;
-    unsigned char *d;
+    int i;
 
     i = 0;
-    s = ( unsigned char *) src;
-    d = (unsigned char *) dest;
-    
-    if (!dest && !src)
-        return(0);
-    while (n > i)
-    {
-        d[i] = s[i];
+    while (s[i])
         i++;
-    }
-    return (d);
+    return (i);
 }
-/*
+
+size_t ft_strlcpy(char *dst, const char *src, size_t size)
+{
+    size_t srcsize;
+    size_t i;
+
+    i = 0;
+    if (!src || !dst)
+        return(0);
+    srcsize = ft_strlen(src);
+    if (size > 0)
+    {
+        while (src[i] != '\0' && i < (size -1))
+        {
+            dst[i] = src[i];
+            i++;
+        }
+        dst[i] = '\0';
+    }
+    return (srcsize);
+}
+
 int main (void)
 {
-    char dest [20] = "ydar";
-    char src [8] = "abcdefgh";
-    int n = 5;
+    char dest [] = "ydar";
+    char src [] = "Ap";
+    size_t n = 20;
 
-    printf("%s\n", (unsigned char *) ft_memcpy(&src[0], &src[1], n));
+    printf("%zu\n", ft_strlcpy(dest, src, n));
+    
     return (0);
 }
-*/
-

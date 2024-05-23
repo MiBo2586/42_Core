@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                         :+:      :+:    :+:   */
+/*   ft_strrchr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mborovka <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,35 +10,41 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h>
+#include <unistd.h>
 #include <string.h>
-void *ft_memcpy(void *dest, const void *src, size_t n)
+char *ft_strrchr (const char *s, int c)
 {
-    size_t i;
-    unsigned char *s;
-    unsigned char *d;
+    char *n;
+    char *o;
 
-    i = 0;
-    s = ( unsigned char *) src;
-    d = (unsigned char *) dest;
-    
-    if (!dest && !src)
-        return(0);
-    while (n > i)
+    n = (char *)s;
+    o = n;
+    while (*n != '\0')
     {
-        d[i] = s[i];
-        i++;
+        if (*n == c)
+        {
+            o = n;
+            while (*++o != c)
+            {
+                if (*o == '\0')
+                    return(n);
+            }
+        }
+        n++;
     }
-    return (d);
+    if (*n == '\0')
+        return(0);
+    return(0);
 }
 /*
 int main (void)
 {
-    char dest [20] = "ydar";
-    char src [8] = "abcdefgh";
-    int n = 5;
+    char a;
+    char *b;
 
-    printf("%s\n", (unsigned char *) ft_memcpy(&src[0], &src[1], n));
-    return (0);
+    a = 'b';
+    b = "bneirheithacqdasdfasdffabfda";
+    printf("%s\n", ft_strrchr(b, a));
+    return(0);
 }
 */
-

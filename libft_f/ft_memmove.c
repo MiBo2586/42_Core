@@ -10,8 +10,52 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h>
+#include <string.h>
 
 void *ft_memmove(void *dest, const void *src, size_t n)
 {
+    size_t i;
+    unsigned char *s;
+    unsigned char *d;
+
+    i = 0;
+    s = ( unsigned char *) src;
+    d = (unsigned char *) dest;
+
+    if (!dest && !src)
+        return(0);
+    if ((size_t)d - (size_t)s < n )
+    {
+        i = n - 1;
+        while (i >= 0)
+        {
+            d[i] = s[i];
+            i--;
+        }
+    }
     
+    else
+    {
+        while (i < n)
+        {
+            d[i] = s[i];
+            i++;
+        }
+    }
+    return (d);
 }
+/*
+int main (void)
+{
+    char dest [20] = "ydar";
+    char src [20] = "Ahoj Jak je";
+    int n = 19;
+
+    printf("%s\n", (unsigned char *) ft_memmove(src, dest, n));
+    printf("%s\n", (unsigned char *) memcpy (src, dest, n));
+    printf("%s\n", (unsigned char *) memmove (src, dest, n));
+    
+    return (0);
+}
+*/
+

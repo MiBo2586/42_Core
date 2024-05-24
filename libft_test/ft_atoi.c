@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                         :+:      :+:    :+: */
+/*   ft_atoi.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mborovka <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,44 +10,36 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h>
-#include <string.h>
 #include "libft.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+int	ft_atoi(const char *nptr)
 {
-	size_t			i;
-	unsigned char	*s;
-	unsigned char	*d;
+	int	n;
+	int	m;
 
-	i = 0;
-	s = (unsigned char *) src;
-	d = (unsigned char *) dest;
-	if (d > s)
+	n = 1;
+	m = 0;
+	while (*nptr == ' ' || *nptr == '\f' || *nptr == '\n' || *nptr == '\r'
+		|| *nptr == '\t' || *nptr == '\v')
+		nptr++;
+	if (*nptr == '-' || *nptr == '+')
 	{
-		while (n-- >= 1)
-			d[n] = s[n];
+		if (*nptr == '-')
+			n = n * -1;
+		nptr++;
 	}
-	else
+	while (*nptr >= '0' && *nptr <= '9')
 	{
-		while (i < n)
-		{
-			d[i] = s[i];
-			i++;
-		}
+		m = (m * 10) + (*nptr - 48);
+		nptr++;
 	}
-	return (d);
+	m = m * n;
+	return (m);
 }
 /*
-int main (void)
+int main(void)
 {
-    char dest [20] = "ydar";
-    char src [20] = "Ahoj Jak je";
-    int n = 60;
-
-    printf("%s\n", (unsigned char *) ft_memmove(src, dest, n));
-    printf("%s\n", (unsigned char *) memcpy (src, dest, n));
-    printf("%s\n", (unsigned char *) memmove (src, dest, n));
-    
+    printf("Result is: %d\n", ft_atoi("  -654998412e19194tje"));
     return (0);
 }
 */

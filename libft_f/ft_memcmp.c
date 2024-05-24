@@ -1,43 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mborovka <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 14:24:31 by mborovka          #+#    #+#             */
-/*   Updated: 2024/05/20 14:24:33 by mborovka         ###   ########.fr       */
+/*   Created: 2024/05/20 14:23:30 by mborovka          #+#    #+#             */
+/*   Updated: 2024/05/20 14:23:33 by mborovka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <string.h>
 #include <stdio.h>
-#include <unistd.h>
+#include <stddef.h>
 #include "libft.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	size_t			i;
-	unsigned char	*p;
+	size_t	i;
+	size_t	c;
 
 	i = 0;
-	p = s;
+	c = 0;
 	while (i < n)
 	{
-		p[i] = (unsigned char)c;
+		if (*(unsigned char *)s1 != *(unsigned char *)s2)
+		{
+			c = *(unsigned char *)s1 - *(unsigned char *)s2;
+			return (c);
+		}
+		s1++;
+		s2++;
 		i++;
 	}
-	return (p);
+	return (0);
 }
 /*
 int main (void)
 {
-    int b;
-    int n;
+    const char *a;
+    const char *b;
+    size_t n;
 
-    char s[20] = "00000000000000";
-    b = 92;    
-    n = 5;
-    printf  ("%s\n", (char *) ft_memset(s, b, n));
+    a = "Hnllox";
+    b = "Hellox";
+    n = 2;
+    printf("%d\n", ft_memcmp(b, a, n));
     return(0);
 }
 */

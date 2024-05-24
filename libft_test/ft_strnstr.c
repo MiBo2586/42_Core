@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                         :+:      :+:    :+: */
+/*   ft_strnstr.c                                         :+:      :+:    :+: */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mborovka <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,44 +10,38 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h>
+#include <unistd.h>
 #include <string.h>
 #include "libft.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	size_t			i;
-	unsigned char	*s;
-	unsigned char	*d;
+	size_t	i;
+	size_t	l;
 
 	i = 0;
-	s = (unsigned char *) src;
-	d = (unsigned char *) dest;
-	if (d > s)
+	l = 0;
+	if (little[l] == '\0')
+		return ((char *)big);
+	while (big[i] && len > i)
 	{
-		while (n-- >= 1)
-			d[n] = s[n];
-	}
-	else
-	{
-		while (i < n)
+		while (big[i + l] == little[l] && len > i)
 		{
-			d[i] = s[i];
-			i++;
+			if (big[i + l] || little[l])
+				return ((char *) big + i);
+			l++;
 		}
+		l = 0;
+		i++;
 	}
-	return (d);
+	return (0);
 }
 /*
 int main (void)
 {
-    char dest [20] = "ydar";
-    char src [20] = "Ahoj Jak je";
-    int n = 60;
-
-    printf("%s\n", (unsigned char *) ft_memmove(src, dest, n));
-    printf("%s\n", (unsigned char *) memcpy (src, dest, n));
-    printf("%s\n", (unsigned char *) memmove (src, dest, n));
-    
-    return (0);
+    printf("%s\n",ft_strnstr("Hello World", "World",15));
+    printf("%s\n",ft_strnstr("Hello World", "Hel",3));
+    printf("%s\n",ft_strnstr("Hello World", "el",3));
+    return(0);
 }
 */

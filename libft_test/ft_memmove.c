@@ -22,10 +22,16 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	i = 0;
 	s = (unsigned char *) src;
 	d = (unsigned char *) dest;
-	if (d > s)
+	if (!dest && !src)
+		return (0);
+	if ((size_t)d - (size_t)s < n)
 	{
-		while (n-- >= 1)
-			d[n] = s[n];
+		i = n - 1;
+		while (i >= 1)
+		{
+			d[i] = s[i];
+			i--;
+		}
 	}
 	else
 	{
@@ -42,7 +48,7 @@ int main (void)
 {
     char dest [20] = "ydar";
     char src [20] = "Ahoj Jak je";
-    int n = 60;
+    int n = 19;
 
     printf("%s\n", (unsigned char *) ft_memmove(src, dest, n));
     printf("%s\n", (unsigned char *) memcpy (src, dest, n));

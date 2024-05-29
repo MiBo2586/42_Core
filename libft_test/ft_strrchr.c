@@ -23,10 +23,10 @@ char	*ft_strrchr(const char *s, int c)
 	o = n;
 	while (*n != '\0')
 	{
-		if (*n == c)
+		if (*n == (char)c)
 		{
 			o = n;
-			while (*++o != c)
+			while (*++o != (char)c)
 			{
 				if (*o == '\0')
 					return (n);
@@ -34,8 +34,8 @@ char	*ft_strrchr(const char *s, int c)
 		}
 		n++;
 	}
-	if (*n == '\0')
-		return (0);
+	if (*n == '\0' && c == '\0')
+		return (n);
 	return (0);
 }
 /*

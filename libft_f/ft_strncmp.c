@@ -21,7 +21,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	size_t	c;
 
 	i = 0;
-	while (*s1 && *s2 && i <= n)
+	while ((*s1 || *s2) && i < n)
 	{
 		if (*s1 != *s2)
 		{
@@ -39,9 +39,9 @@ int main (void)
 {
     int n;
 
-    char *x = "ABCC";
-    char *z = "ABCc";
-    n = 6;
+    char *x = "Tripouille";
+    char *z = "TripouilleX";
+    n = 42;
     printf("%d\n", ft_strncmp(x, z, n));
     return(0);
 }

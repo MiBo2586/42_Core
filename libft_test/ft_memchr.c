@@ -22,14 +22,14 @@ void	*ft_memchr(const void *s, int c, size_t n)
 
 	i = 0;
 	p = (unsigned char *)s;
-	while (*p != '\0' && n > i)
+	while (*p != '\0' || n > i)
 	{
 		if (*p == (unsigned char)c)
 			return (p);
 		i++;
 		p++;
 	}
-	return (0);
+	return (NULL);
 }
 /*
 int main (void)
@@ -38,9 +38,9 @@ int main (void)
     const char *b;
     size_t n;
 
-    a = 'b';
+    a = 'i';
     b = "neirheithzacqdasdfasdfbfafda";
-    n = 42;
+    n = 3;
     printf("%s\n", (char *)ft_memchr(b, a, n));
     return(0);
 }

@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
@@ -20,23 +21,19 @@ char	*ft_strchr(const char *s, int c)
 	char	*n;
 
 	n = (char *)s;
-	while (*n != '\0')
-	{
-		if (*n == c)
-			return (n);
+	while (*n != '\0' && *n != (char)c)
 		n++;
-	}
-	if (*n == '\0')
-		return (0);
-	return (0);
+	if (*n == (char)c)
+		return (n);
+	return (NULL);
 }
 /*
 int main (void)
 {
-    char a;
+    int a;
     char *b;
 
-    a = 'b';
+    a = 'b'+ 256;
     b = "neirheithzacbqdasdfasdfbfafda";
     printf("%s\n", ft_strchr(b, a));
     return(0);

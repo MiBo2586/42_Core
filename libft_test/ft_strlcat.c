@@ -18,22 +18,25 @@
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
 	size_t	dstsize;
-	size_t	i;
+	size_t	srcsize;
 
-	i = 0;
 	if ((!src || !dst) && !size)
 		return (0);
 	dstsize = ft_strlen(dst);
-	if (size > 0)
+	srcsize = ft_strlen(src);
+	if (dstsize >= size)
 	{
-		while (src[i] != '\0' && (dstsize + i) < (size -1))
-		{
-			dst[dstsize + i] = src[i];
-			i++;
-		}
-		dst[dstsize + i] = '\0';
+		dstsize = size;
+		return (dstsize + srcsize);
 	}
-	return (dstsize + i);
+	if (srcsize < size - dstsize)
+		ft_memcpy(dst + dstsize, src, srcsize + 1);
+	else
+	{
+		ft_memcpy(dst + dstsize, src, size - dstsize -1);
+		dst[size - 1] = '\0';
+	}
+	return (dstsize + srcsize);
 }
 /*
 int main (void)

@@ -14,7 +14,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static long int ft_ncount(n)
+char	*ft_nstring(char *p, int  buffer, int n)
+{
+	while ((buffer - 1) != 0)
+	{
+		p[buffer - 1] = (n%10) + 48;
+		n = n/10;
+		buffer--;
+	}
+	return(p);
+}
+
+static long int ft_ncount(int n)
 {
 	int	len;
 
@@ -37,10 +48,8 @@ char	*ft_itoa(int n)
 
 	i = 0;
 	buffer = ft_ncount(n);
-	printf("%d\n", buffer);
 	if (n<0)
-		buffer= buffer +1;
-	printf("%d\n", buffer);
+		buffer= buffer + 1;
 	p = (char *)malloc (sizeof(char *) * (buffer + 1));
 	if (!p)
 		return(0);
@@ -54,19 +63,12 @@ char	*ft_itoa(int n)
 		p[0] = '-';
 		n = n * -1;
 	}
-	printf("%s\n", p);
-	printf("%d\n", buffer);
-	while (buffer != 0)
-	{
-		p[buffer] = (n%10) + 48;
-		n = n/10;
-		buffer--;
-	}
-	return(p);
+	return(ft_nstring(p, buffer, n));
 }
-
+/*
 int main (void)
 {
-	printf("%s\n", ft_itoa(-564));
+	printf("%s\n", ft_itoa(-575485648));
 	return(0);
 }
+*/

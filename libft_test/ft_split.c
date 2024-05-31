@@ -64,12 +64,17 @@ int ft_wordcount(char const *s, char c)
 {
 	size_t	count;
 
+	if(!*s)
+		return (0);
 	count = 0;
 	while (*s)
 	{
-		if (*s == c)
+		while (*s == c)
+			s++;
+		if (*s)
 			count++;
-		s++;
+		while(*s != c && *s)
+			s++;
 	}
 	return (count);
 }
@@ -77,17 +82,12 @@ int ft_wordcount(char const *s, char c)
 char	**ft_split(char const *s, char c)
 {
 	char	**thewhole;
-	char	*ptr;
 	size_t	n;
 	size_t	i;
-	/*size_t	j;*/
 
 	i = 0;
 	n = 0;
-	/*j = 0;*/
-	if (!s)
-		return(NULL);
-	thewhole = (char **)malloc(sizeof(char *) * (ft_wordcount(s, c) + 2));
+	thewhole = (char **)malloc(sizeof(char *) * (ft_wordcount(s, c) + 1));
 	if (!thewhole)
 		return (0);
 	while (*s)
@@ -96,32 +96,21 @@ char	**ft_split(char const *s, char c)
 			s++;
 		if (*s)
 		{
-			ptr = ft_strchr(s, c);
-			if(!*ptr)
+			if(!ft_strchr(s, c))
 				n = ft_strlen(s);
 			else
-				n = ptr - s;
-			thewhole[i] = ft_substr(s, 0, n);
-			/*if (!thewhole[i])
-			{
-				while (i > j)
-				{	
-					free(thewhole[j]);
-					j++;
-				}
-				free(thewhole);
-				return (NULL);
-			}*/
-			i++;
+				n = ft_strchr(s, c) - s;
+			thewhole[i++] = ft_substr(s, 0, n);
 			s += n;
 		}
 	}
 	thewhole[i] = NULL;
 	return(thewhole);
 }
-
+/*
 int main(void)
 {
 	printf("%s\n", *ft_split("Hello World All", 'W'));
 	return (0);
 }
+*/

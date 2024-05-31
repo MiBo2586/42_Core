@@ -31,9 +31,9 @@ char *ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	s = s + start;
 	ptr_str = ptr;
+	*(ptr+len) = '\0';
 	while (*s != '\0' && len--)
 		*ptr++ = *s++;
-	*ptr = '\0';
 	return (ptr_str);
 }
 /*

@@ -13,23 +13,19 @@
 #include "libft.h"
 #include <stdio.h>
 #include <stdlib.h>
-
+/*
 char	*ft_nstring(char *p, int  buffer, int n)
 {
-	while ((buffer - 1) != 0)
-	{
-		p[buffer - 1] = (n%10) + 48;
-		n = n/10;
-		buffer--;
-	}
-	return(p);
+	
 }
-
+*/
 static long int ft_ncount(int n)
 {
 	int	len;
 
 	len = 0;
+	if (n < 0)
+		len++;
 	if (n == 0)
 		len = 1;
 	while (n != 0)
@@ -37,38 +33,52 @@ static long int ft_ncount(int n)
 		len++;
 		n = n/10;
 	}
+	printf("%d\n", len);
 	return (len);
+}
+
+static long long	abs_n(long long n)
+{
+	long long number;
+
+	if (n < 0)
+		number = -1 * n;
+	else
+		number = 1 * n;
+	return (number);
 }
 
 char	*ft_itoa(int n)
 {
-	int buffer;
+	int	buffer;
 	char *p;
-	int	i;
+	unsigned int k;
+	int sign;
 
-	i = 0;
-	buffer = ft_ncount(n);
-	if (n<0)
-		buffer= buffer + 1;
-	p = (char *)malloc (sizeof(char *) * (buffer + 1));
-	if (!p)
-		return(0);
-	if (!n)
-	{
-		p[i] = '0';
-		return (p);
-	}
+	sign = 0;
 	if (n < 0)
+		sign = 1;
+	buffer = ft_ncount(n);
+	p = (char *)malloc (sizeof(char) * (buffer+1));
+	if (!p)
+		return(NULL);
+	*(p+buffer) = '\0';
+	k = abs_n(n);
+	while (buffer--)
 	{
-		p[0] = '-';
-		n = n * -1;
+		*(p + buffer) = 48 + k % 10;
+		k = k/10;
 	}
-	return(ft_nstring(p, buffer, n));
+	if (sign == 1)
+		*(p) = 45;
+	return(p);
 }
 /*
 int main (void)
 {
-	printf("%s\n", ft_itoa(-575485648));
+	printf("%s\n", ft_itoa(2147483647));
+	printf("%s\n", ft_itoa(524));
+	printf("%s\n", ft_itoa(-10));
 	return(0);
 }
 */

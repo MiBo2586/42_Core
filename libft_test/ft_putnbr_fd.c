@@ -33,7 +33,7 @@ void    ft_putnbr_fd(int n, int fd)
         ft_putchar_fd('-', fd);
         k = k * -1;
     }
-    while (k/digits > 10)
+    while (k/digits >= 10)
         digits = digits * 10;
     while (digits)
     {
@@ -49,7 +49,6 @@ int main(void)
     int fd;
 
     fd = open ("znumb.txt", O_CREAT | O_RDWR, 0700);
-    ft_putnbr_fd(2545462, fd);
-    ft_putnbr_fd(-2545462, fd);
+    ft_putnbr_fd(10, fd);
 }
 */

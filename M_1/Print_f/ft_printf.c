@@ -169,20 +169,20 @@ int ft_format(va_list args, const char format)
 
 	data_type = 0;
 	if (format == 'c')
-		data_type = va_arg(args, char);
+		return (ft_putchar((va_args(args, int))));
 	else if (format == 's')
-		data_type = va_arg(args, char *);
+		return (ft_putstr((va_arg(args, char *))));
 	else if (format == 'p')
-		data_type = va_arg(args, char *);
-	else if (format == 'd')
-		data_type = va_arg(args, int);
-	else if (format == 'i')
-		data_type = va_arg(args, int);
+		p = va_arg(args, void *);
+		if (p)
+			return (ft_hexaddress(p));
+		return (ft_putstr("0x0"));
+	else if (format == 'd' || format == 'i')
+		return (ft_nbr((va_args(args, int))));
 	else if (format == 'u')
-		data_type = va_arg(args, unsigned int);
-	else if (format == 'x')
-		data_type = va_arg(args, unsigned int);
-	else if (format == 'X')
+		return (ft_u_putnbr((va_args(args, unsigned int))));
+	else if (format == 'x' || format == 'X');
+		ft_puthex (format);
 		data_type = va_arg(args, unsigned int);
 	else if (format == '%')
 		data_type = va_arg(args, unsigned int);

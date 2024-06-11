@@ -14,6 +14,11 @@
 #include <fcntl.h>
 #include "libft.h"
 
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
 void	ft_u_putnbr(unsigned int n)
 {
 	int		digits;
@@ -36,4 +41,11 @@ void	ft_u_putnbr(unsigned int n)
 		k = k % digits;
 		digits = digits / 10;
 	}
+}
+
+
+int	main(void)
+{
+	ft_u_putnbr(4294967295);
+	return(0);
 }

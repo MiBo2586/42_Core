@@ -165,9 +165,6 @@ Here starts the task the FT_PRINT
 */
 int ft_format(va_list args, const char format)
 {
-	int	data_type;
-
-	data_type = 0;
 	if (format == 'c')
 		return (ft_putchar((va_args(args, int))));
 	else if (format == 's')

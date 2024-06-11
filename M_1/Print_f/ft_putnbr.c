@@ -13,9 +13,15 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <fcntl.h>
-#include "libft.h"
 
-void	ft_putnbr(unsigned long n, char format)
+/*
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+*/
+
+void	ft_putnbr(unsigned long n)
 {
 	int		digits;
 	long	k;
@@ -38,3 +44,10 @@ void	ft_putnbr(unsigned long n, char format)
 		digits = digits / 10;
 	}
 }
+/*
+int	main(void)
+{
+	ft_putnbr(-42949);
+	return(0);
+}
+*/

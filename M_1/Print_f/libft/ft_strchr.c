@@ -1,35 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mborovka <mborovka@student.42prague.com>   #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-06-10 09:10:33 by mborovka          #+#    #+#             */
-/*   Updated: 2024-06-10 09:10:33 by mborovka         ###   ########.fr       */
+/*   Created: 2024-05-24 14:27:37 by mborovka          #+#    #+#             */
+/*   Updated: 2024-05-24 14:27:37 by mborovka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
+#include "libft.h"
 
-/*
-void	ft_putchar(char c)
+char	*ft_strchr(const char *s, int c)
 {
-	write(1, &c, 1);
-}
-*/
-int ft_putstr(char *c)
-{
-	if (!c)
-	{
-		return(write(1,"(null)", 6));
-	}
-	return (write(1, c, ft_strlen(c)));
+	char	*n;
+
+	n = (char *)s;
+	while (*n != '\0' && *n != (char)c)
+		n++;
+	if (*n == (char)c)
+		return (n);
+	return (NULL);
 }
 /*
-int 	main(void)
+int main (void)
 {
-	ft_putstr("Ahoj");
-	return(0);
+    int a;
+    char *b;
+
+    a = 'b'+ 256;
+    b = "neirheithzacbqdasdfasdfbfafda";
+    printf("%s\n", ft_strchr(b, a));
+    return(0);
 }
 */

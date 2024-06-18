@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mborovka <mborovka@student.42prague.com>   #+#  +:+       +#+        */
+/*   By: mborovka <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-06-10 09:10:33 by mborovka          #+#    #+#             */
-/*   Updated: 2024-06-10 09:10:33 by mborovka         ###   ########.fr       */
+/*   Created: 2024/05/20 14:23:10 by mborovka          #+#    #+#             */
+/*   Updated: 2024/05/20 14:23:12 by mborovka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#include "ft_printf.h"
-
-/*
-void	ft_putchar(char c)
+int	ft_isprint(int c)
 {
-	write(1, &c, 1);
-}
-*/
-int ft_putstr(char *c)
-{
-	if (!c)
-	{
-		return(write(1,"(null)", 6));
-	}
-	return (write(1, c, ft_strlen(c)));
+	if (c >= 32 && c <= 126)
+		return (1);
+	return (0);
 }
 /*
-int 	main(void)
+int main (void)
 {
-	ft_putstr("Ahoj");
-	return(0);
+    char b;
+
+    b = ' ';
+    return(ft_isprint (b));
 }
 */

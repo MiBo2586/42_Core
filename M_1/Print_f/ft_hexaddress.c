@@ -10,18 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
+
 static int  ft_add(unsigned long n, const char *base)
 {
     int i;
 
     i = 0;
-    if (n > ft_strlen(base) - 1)
-        i += rec_print(n/(ft_strlen(base)), base);
+	if (n > ((unsigned long) (ft_strlen(base) - 1)))
+        i += ft_add(n/(ft_strlen(base)), base);
 	i += ft_putchar(*(base + (n % ft_strlen(base))));
 	return (i);
 }
 
-int ft_hexaaddress (void *format)
+int ft_hexaddress (void *format)
 {
     unsigned long   n;
     const char      *base;

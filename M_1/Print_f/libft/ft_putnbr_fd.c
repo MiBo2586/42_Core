@@ -1,40 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putuns.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mborovka <mborovka@student.42prague.com>   #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-06-10 08:56:18 by mborovka          #+#    #+#             */
-/*   Updated: 2024-06-10 08:56:18 by mborovka         ###   ########.fr       */
+/*   Created: 2024-05-30 08:41:02 by mborovka          #+#    #+#             */
+/*   Updated: 2024-05-30 08:41:02 by mborovka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_printf.h"
 
-int	ft_u_putnbr(unsigned int n)
+#include <unistd.h>
+#include <stdio.h>
+#include <fcntl.h>
+#include "libft.h"
+
+void	ft_putnbr_fd(int n, int fd)
 {
 	int		digits;
-	unsigned long	k;
+	long	k;
 	char	s;
 
 	digits = 1;
 	k = n;
+	if (k < 0)
+	{
+		ft_putchar_fd('-', fd);
+		k = k * -1;
+	}
 	while (k / digits >= 10)
 		digits = digits * 10;
 	while (digits)
 	{
 		s = k / digits + 48;
-		ft_putchar(s);
+		ft_putchar_fd(s, fd);
 		k = k % digits;
 		digits = digits / 10;
 	}
-	return(1);
 }
-
 /*
-int	main(void)
+int main(void)
 {
-	ft_u_putnbr(4294967295);
-	return(0);
+    int fd;
+
+    fd = open ("znumb.txt", O_CREAT | O_RDWR, 0700);
+    ft_putnbr_fd(-2147483648, -1);
 }
 */

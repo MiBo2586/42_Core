@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mborovka <mborovka@student.42prague.com>   #+#  +:+       +#+        */
+/*   By: mborovka <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-06-10 09:10:33 by mborovka          #+#    #+#             */
-/*   Updated: 2024-06-10 09:10:33 by mborovka         ###   ########.fr       */
+/*   Created: 2024/05/20 14:22:36 by mborovka          #+#    #+#             */
+/*   Updated: 2024/05/20 14:22:44 by mborovka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#include "ft_printf.h"
+int	ft_isalnum(int c)
+{
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
+		|| (c >= '0' && c <= '9'))
+		return (1);
+	return (0);
+}
 
 /*
-void	ft_putchar(char c)
+int main (void)
 {
-	write(1, &c, 1);
-}
-*/
-int ft_putstr(char *c)
-{
-	if (!c)
-	{
-		return(write(1,"(null)", 6));
-	}
-	return (write(1, c, ft_strlen(c)));
-}
-/*
-int 	main(void)
-{
-	ft_putstr("Ahoj");
-	return(0);
+    char b;
+
+    b = 62;
+    return (ft_isalnum (b));
 }
 */

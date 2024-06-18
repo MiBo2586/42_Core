@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mborovka <mborovka@student.42prague.com>   #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-06-10 09:10:33 by mborovka          #+#    #+#             */
-/*   Updated: 2024-06-10 09:10:33 by mborovka         ###   ########.fr       */
+/*   Created: 2024-05-24 14:19:23 by mborovka          #+#    #+#             */
+/*   Updated: 2024-05-24 14:19:23 by mborovka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
+#include <stdlib.h>
 
-/*
-void	ft_putchar(char c)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	write(1, &c, 1);
+	void	*p;
+
+	if (nmemb != 0 && size > (((size_t) - 1) / nmemb))
+		return (NULL);
+	p = malloc (nmemb * size);
+	if (!p)
+		return (NULL);
+	ft_bzero (p, nmemb * size);
+	return (p);
 }
-*/
-int ft_putstr(char *c)
-{
-	if (!c)
-	{
-		return(write(1,"(null)", 6));
-	}
-	return (write(1, c, ft_strlen(c)));
-}
-/*
-int 	main(void)
-{
-	ft_putstr("Ahoj");
-	return(0);
-}
-*/

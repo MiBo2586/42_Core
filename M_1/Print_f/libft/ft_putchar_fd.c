@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mborovka <mborovka@student.42prague.com>   #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-06-10 09:10:33 by mborovka          #+#    #+#             */
-/*   Updated: 2024-06-10 09:10:33 by mborovka         ###   ########.fr       */
+/*   Created: 2024-05-31 14:22:21 by mborovka          #+#    #+#             */
+/*   Updated: 2024-05-31 14:22:21 by mborovka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
+#include <fcntl.h>
+#include <unistd.h>
 
-/*
-void	ft_putchar(char c)
+void	ft_putchar_fd(char c, int fd)
 {
-	write(1, &c, 1);
-}
-*/
-int ft_putstr(char *c)
-{
-	if (!c)
-	{
-		return(write(1,"(null)", 6));
-	}
-	return (write(1, c, ft_strlen(c)));
+	if (fd > 0)
+		write(fd, &c, 1);
 }
 /*
-int 	main(void)
+int main(void)
 {
-	ft_putstr("Ahoj");
+	int fd;
+
+	fd = open ("test.txt", O_CREAT | O_RDWR, 0700);
+	ft_putchar_fd('F', fd);
 	return(0);
 }
 */

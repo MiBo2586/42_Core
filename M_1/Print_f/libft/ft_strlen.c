@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mborovka <mborovka@student.42prague.com>   #+#  +:+       +#+        */
+/*   By: mborovka <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-06-10 09:10:33 by mborovka          #+#    #+#             */
-/*   Updated: 2024-06-10 09:10:33 by mborovka         ###   ########.fr       */
+/*   Created: 2024/05/20 14:23:30 by mborovka          #+#    #+#             */
+/*   Updated: 2024/05/20 14:23:33 by mborovka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#include "ft_printf.h"
+int	ft_strlen(const char *s)
+{
+	int	i;
 
-/*
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-*/
-int ft_putstr(char *c)
-{
-	if (!c)
-	{
-		return(write(1,"(null)", 6));
-	}
-	return (write(1, c, ft_strlen(c)));
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }
 /*
-int 	main(void)
+int main (void)
 {
-	ft_putstr("Ahoj");
-	return(0);
+    char *b = "Ahoj To hel test  je";
+
+    return (ft_strlen(b));
 }
 */

@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
-#include <fcntl.h>
+#include "ft_printf.h"
 
 /*
 void	ft_putchar(char c)
@@ -21,7 +19,7 @@ void	ft_putchar(char c)
 }
 */
 
-void	ft_putnbr(unsigned long n)
+int	ft_putnbr(unsigned long n)
 {
 	int		digits;
 	long	k;
@@ -43,6 +41,7 @@ void	ft_putnbr(unsigned long n)
 		k = k % digits;
 		digits = digits / 10;
 	}
+	return (1);
 }
 /*
 int	main(void)

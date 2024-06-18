@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mborovka <mborovka@student.42prague.com>   #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-06-10 09:10:33 by mborovka          #+#    #+#             */
-/*   Updated: 2024-06-10 09:10:33 by mborovka         ###   ########.fr       */
+/*   Created: 2024-05-24 14:25:51 by mborovka          #+#    #+#             */
+/*   Updated: 2024-05-24 14:25:51 by mborovka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
+#include <stdlib.h>
+#include <string.h>
 
-/*
-void	ft_putchar(char c)
+char	*ft_strdup(const char *s)
 {
-	write(1, &c, 1);
-}
-*/
-int ft_putstr(char *c)
-{
-	if (!c)
+	char	*p;
+	size_t	i;
+
+	i = 0;
+	p = (char *) malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (!p)
+		return (NULL);
+	while (s[i])
 	{
-		return(write(1,"(null)", 6));
+		p[i] = s[i];
+		i++;
 	}
-	return (write(1, c, ft_strlen(c)));
+	p[i] = '\0';
+	return (p);
 }
-/*
-int 	main(void)
-{
-	ft_putstr("Ahoj");
-	return(0);
-}
-*/

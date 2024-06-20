@@ -23,11 +23,11 @@
 # include "./libft/libft.h"
 
 int		ft_printf(const char *format, ...);
-int		ft_hexaddress (void *format);
-int		ft_putchar(char c);
+int		ft_hexaddress(void *format);
+int		ft_putchar(const char c);
 int		ft_puthex(unsigned long n, char format);
 int		ft_putnbr(unsigned long n);
-int		ft_putstr(char *c);
+int		ft_putstr(const char *c);
 int		ft_u_putnbr(unsigned int n);
 
 #endif

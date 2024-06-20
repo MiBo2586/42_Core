@@ -12,21 +12,14 @@
 
 #include "ft_printf.h"
 
-static int ft_format(va_list args, const char format)
+static int	ft_format(va_list args, const char format)
 {
-	void *p;
-
 	if (format == 'c')
 		return (ft_putchar((va_arg(args, int))));
 	else if (format == 's')
 		return (ft_putstr((va_arg(args, char *))));
 	else if (format == 'p')
-	{
-		p = va_arg(args, void *);
-		if (p)
-			return (ft_hexaddress(p));
-		return (ft_putstr("0x0"));
-	}
+		return (ft_hexaddress(va_arg(args, void *)));
 	else if (format == 'd' || format == 'i')
 		return (ft_putnbr((va_arg(args, int))));
 	else if (format == 'u')
@@ -37,14 +30,13 @@ static int ft_format(va_list args, const char format)
 		return (ft_putchar('%'));
 	else
 		return (-1);
-	return(0);
 }
 
 int	ft_printf(const char *format, ...)
 {
-	int	i;
-	va_list arg;
-	int len_str;
+	int		i;
+	va_list	arg;
+	int		len_str;
 
 	va_start(arg, format);
 	i = 0;

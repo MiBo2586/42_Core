@@ -13,11 +13,13 @@
 
 int	ft_u_putnbr(unsigned int n)
 {
-	int		digits;
+	int				digits;
 	unsigned long	k;
-	char	s;
+	char			s;
+	int				len;
 
 	digits = 1;
+	len = 0;
 	k = n;
 	while (k / digits >= 10)
 		digits = digits * 10;
@@ -27,8 +29,9 @@ int	ft_u_putnbr(unsigned int n)
 		ft_putchar(s);
 		k = k % digits;
 		digits = digits / 10;
+		len++;
 	}
-	return(1);
+	return (len);
 }
 
 /*

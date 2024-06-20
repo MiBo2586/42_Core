@@ -18,11 +18,11 @@ void	ft_putchar(char c)
 	write(1, &c, 1);
 }
 */
-int ft_putstr(char *c)
+int	ft_putstr(const char *c)
 {
 	if (!c)
 	{
-		return(write(1,"(null)", 6));
+		return (write (1, "(null)", 6));
 	}
 	return (write(1, c, ft_strlen(c)));
 }

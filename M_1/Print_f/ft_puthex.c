@@ -31,13 +31,12 @@ int	ft_strlen(const char *s)
 
 */
 
-
 int	ft_puthex(unsigned long n, char format)
 {
-	char	*base;
+	char			*base;
 	unsigned int	num;
 	unsigned int	len;
-	int		i;
+	int				i;
 
 	if (format == 'x')
 		base = "0123456789abcdef";
@@ -47,7 +46,7 @@ int	ft_puthex(unsigned long n, char format)
 	num = (unsigned int)n;
 	len = ft_strlen (base);
 	if (num > (len - 1))
-		i += (ft_puthex(num/len, format));
+		i += (ft_puthex(num / len, format));
 	i += ft_putchar(*(base + (num % len)));
 	return (i);
 }

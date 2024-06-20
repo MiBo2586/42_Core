@@ -29,14 +29,12 @@ all: subsystem $(NAME)
 subsystem:
 	$(MAKE) -C $(LIB_PATH)
 
-bonus: all
-
 $(NAME): $(OBJECTS)
 	ar -rcs $(NAME) $(OBJECTS) $(LIB_PATH)/*.o
 
 clean:
 	$(MAKE) -C $(LIB_PATH) clean
-	rm -f $(OBJECTS)
+	rm -f $(OBJECTS) $(NAME) $(LIB_PATH)/*.a
 
 fclean: clean
 	$(MAKE) -C $(LIB_PATH) fclean

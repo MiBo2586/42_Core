@@ -4,38 +4,57 @@
 #include <stdio.h>
 
 
-int	ft_len(char *sentence)
+
+int	ft_strlen(char *sentence)
 {
 	int	i;
 
 	i = 0;
-	printf("iteration%d",i);
-	while (sentence)
+	/*printf("iteration%d",i);*/
+	while (sentence[i])
 		i++;
 	return (i);
 }
 
-char	*append_list(char *list)
+char	*ft_strchr(char *s, int c)
 {
-	int i;
-	int list_lenght;
-	int new_part;
-	char *final_list;
+	char	*n;
 
+	n = (char *)s;
+	while (*n != '\0' && *n != (char)c)
+		n++;
+	if (*n == (char)c)
+		return (n);
+	return (NULL);
+}
+
+char	*ft_strjoin(char *s1, char *s2)
+{
+	int	buffer;
+	char	*new_line;
+	int	i;
+	int l;
+
+	/*printf("strjoin s2: %s\n", s2);*/
 	i = 0;
-	printf("List: %s\n", list);
-	list_lenght = ft_len (list);
-	printf("List lengt: %d", list_lenght);
-	new_part = ft_len (buffer);
-	printf("New part lengt: %d", new_part);
-	final_list = (char*)malloc(new_part + list_lenght + 1);
-
-	while (buffer)
+	l = 0;
+	buffer = ft_strlen(s1) + ft_strlen(s2);
+	/*printf("This is the buffer for strjoin: %d/n", buffer);*/
+	new_line = (char*)malloc(sizeof(char) * (buffer + 1));
+	if (!new_line || !s1 || !s2)
+		return (NULL);
+	while (s1[l])
 	{
-		final_list[list_lenght] = buffer[i];
+		new_line[l] = s1[l];
+		l++;
+	}
+	while (s2[i])
+	{
+		new_line [l+i] = s2[i];
 		i++;
 	}
-	return (final_list);
+	new_line [l+i] = '\0';
+	return(new_line);
 }
 
 char	*read_list(int buffer_size, int fd)
@@ -48,10 +67,6 @@ char	*read_list(int buffer_size, int fd)
 	bytes_read is how many bytes were  red as it may differ from what I wanted to read
 	buffer is what I have read those are the characters
 	*/
-	
-	
-	/*while (!found_newline())
-	{*/
 	buffer = (char*)malloc(buffer_size + 1);
 	if (buffer == NULL)
 		return(0);
@@ -63,8 +78,8 @@ char	*read_list(int buffer_size, int fd)
 		return(0);
 	}
 	buffer[bytes_read] = '\0';
-	printf("bytes read:%s\n", buffer);
-	/*write(1, &bytes_read, 10);*/
+
+	/*printf("bytes read:%s\n", buffer);*/
 	return (buffer);
 }
 
@@ -72,16 +87,27 @@ char	*get_next_line(int fd)
 {
 	int 	buffer_size;
 	char	*list;
+	char	*line;
+	char	*part;
 	
 	buffer_size = 10;
 	list = "";
+	line = "";
 
-	while ((read_list(buffer_size, fd)))
+	while ((list = read_list(buffer_size, fd)))
 	{
-		list = read_list(buffer_size, fd);
-		printf("This is the list: %s\n",list);
+		/*list = read_list(buffer_size, fd);*/
+		/*printf("list read:%s\n", list);*/
+		part = ft_strjoin(line, list);
+		line = part;
+		if (ft_strchr(part,'\n'))
+		{
+			printf("initial lines: %s\n", line);
+			return(line);
+		}
 	}
-	return(0);
+	printf("This is the line:\n %s\n", line);
+	return(line);
 }
 
 

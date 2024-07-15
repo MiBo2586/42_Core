@@ -1,121 +1,100 @@
-#include <unistd.h>
-#include <fcntl.h>
-#include <stdlib.h>
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mborovka <mborovka@student.42prague.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024-07-15 14:32:34 by mborovka          #+#    #+#             */
+/*   Updated: 2024-07-15 14:32:34 by mborovka         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "get_next_line.h"
 
-
-int	ft_strlen(char *sentence)
+char *ft_strcat_line(char *s1, char c)
 {
-	int	i;
+	int count;
+	char *the_line;
+	int i;
 
-	i = 0;
-	/*printf("iteration%d",i);*/
-	while (sentence[i])
-		i++;
-	return (i);
-}
-
-char	*ft_strchr(char *s, int c)
-{
-	char	*n;
-
-	n = (char *)s;
-	while (*n != '\0' && *n != (char)c)
-		n++;
-	if (*n == (char)c)
-		return (n);
-	return (NULL);
-}
-
-char	*ft_strjoin(char *s1, char *s2)
-{
-	int	buffer;
-	char	*new_line;
-	int	i;
-	int l;
-
-	/*printf("strjoin s2: %s\n", s2);*/
-	i = 0;
-	l = 0;
-	buffer = ft_strlen(s1) + ft_strlen(s2);
-	/*printf("This is the buffer for strjoin: %d/n", buffer);*/
-	new_line = (char*)malloc(sizeof(char) * (buffer + 1));
-	if (!new_line || !s1 || !s2)
-		return (NULL);
-	while (s1[l])
+	count = 0;
+	i = -1;
+	while (s1[count] != c)
+		count++;
+	the_line = (char*)malloc(sizeof(char) * (count+1));
+	if (!the_line)
+		return(NULL);
+	while (i != count)
 	{
-		new_line[l] = s1[l];
-		l++;
-	}
-	while (s2[i])
-	{
-		new_line [l+i] = s2[i];
+		the_line[i] = s1[i];
 		i++;
 	}
-	new_line [l+i] = '\0';
-	return(new_line);
+	the_line[i] = '\0';
+	return (the_line);
 }
 
-char	*read_list(int buffer_size, int fd)
+static char *ft_strcat_nextline(char *s1, char c)
 {
-	char *buffer;
-	static int	bytes_read;
+	int count;
+	char *next_line;
+	int i;
+	int j;
 
-	/*
-	buffer_size is how many bytes I want to read
-	bytes_read is how many bytes were  red as it may differ from what I wanted to read
-	buffer is what I have read those are the characters
-	*/
-	buffer = (char*)malloc(buffer_size + 1);
-	if (buffer == NULL)
-		return(0);
-
-	bytes_read = read (fd, buffer, buffer_size);
-	if (!bytes_read)
+	count = 0;
+	i = 0;
+	j = 0;
+	while (s1[i] != c)
+		i++;
+	while (s1[i])
 	{
-		free(buffer);
-		return(0);
+		count++;
+		i++;
 	}
-	buffer[bytes_read] = '\0';
-
-	/*printf("bytes read:%s\n", buffer);*/
-	return (buffer);
+	next_line = (char*)malloc(sizeof(char) * (count+1));
+	if (!next_line)
+		return(NULL);
+	while (s1[i-count])
+	{
+		next_line[j] = s1[i-count];
+		j++;
+		count--;
+	}
+	next_line[j] = '\0';
+	return (next_line);
 }
 
 char	*get_next_line(int fd)
 {
-	int 	buffer_size;
-	char	*list;
-	char	*line;
 	char	*part;
+	char	*list;
+	char	*the_line;
+	static char	*the_next_line;
 	
-	buffer_size = 10;
+	part = "";
 	list = "";
-	line = "";
+	the_line = "";
+	the_next_line = "";
 
-	while ((list = read_list(buffer_size, fd)))
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL)
+	while ((part = read_list(BUFFER_SIZE, fd)))
 	{
 		/*list = read_list(buffer_size, fd);*/
 		/*printf("list read:%s\n", list);*/
-		part = ft_strjoin(line, list);
-		line = part;
+		list = ft_strjoin(list, part);
 		if (ft_strchr(part,'\n'))
 		{
-			printf("initial lines: %s\n", line);
-			return(line);
+			printf("initial lines: %s\n", list);
+			the_line = ft_strcat_line(list, '\n');
+			the_next_line = ft_strcat_nextline(list, '\n');
+			free (part);
+			free (list);
+			printf("theline: \n%s\n", the_line);
+			printf("thenextline:\n %s\n", the_next_line);
+			return (the_line);
 		}
 	}
-	printf("This is the line:\n %s\n", line);
-	return(line);
-}
-
-
-int main(void)
-{
-	int fd;
-
-	fd = open ("test.txt", O_RDWR | O_CREAT);
-	get_next_line (fd);
-	return (0);
+	printf("This is the line:\n %s\n", list);
+	return(list);
 }

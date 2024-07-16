@@ -11,11 +11,14 @@
 /* ************************************************************************** */
 #include "get_next_line.h"
 
-int main(void)
+int	main(void)
 {
-	int fd;
+	int		fd;
+	char	*the_line;
 
 	fd = open ("test.txt", O_RDWR | O_CREAT);
-	get_next_line (fd);
+	write (1, "a", 1);
+	the_line = get_next_line (fd);
+	printf("This is the line:\n%s\n", the_line);
 	return (0);
 }

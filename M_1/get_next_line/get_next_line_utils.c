@@ -31,6 +31,8 @@ int	ft_strlen(char *sentence)
 	int	i;
 
 	i = 0;
+	if (!sentence)
+		return (0);
 	while (sentence[i])
 		i++;
 	return (i);
@@ -58,21 +60,26 @@ char	*ft_strjoin(char *s1, char *s2)
 	i = 0;
 	l = 0;
 	buffer = ft_strlen(s1) + ft_strlen(s2);
-	new_line = (char *)malloc(sizeof(char) * (buffer + 1));
-	if (!new_line || !s1 || !s2)
-	{	
-		free (new_line);
+	if (buffer == 0)
 		return (NULL);
-	}
-	while (s1[l])
+	new_line = (char *)malloc(sizeof(char) * (buffer + 1));
+	if (!new_line)
+		return (NULL);
+	if (s1)
 	{
-		new_line[l] = s1[l];
-		l++;
+		while (s1[l])
+		{
+			new_line[l] = s1[l];
+			l++;
+		}
 	}
-	while (s2[i])
+	if (s2)
 	{
-		new_line [l + i] = s2[i];
-		i++;
+		while (s2[i])
+		{
+			new_line [l + i] = s2[i];
+			i++;
+		}
 	}
 	new_line [l + i] = '\0';
 	return (new_line);
@@ -82,31 +89,23 @@ char	*read_list(char *list, int fd)
 {
 	char	*buffer;
 	int		bytes_read;
+	char 	*old_list;
 
 	bytes_read = 1;
+	buffer = (char *)malloc(BUFFER_SIZE + 1);
+	if (!buffer)
+		return (list);
 	while (bytes_read > 0)
 	{
-		buffer = (char *)malloc(BUFFER_SIZE + 1);
-		if (!buffer)
-			return (NULL);
 		ft_bzero(buffer, BUFFER_SIZE + 1);
 		bytes_read = read (fd, buffer, BUFFER_SIZE);
-		if (!buffer)
-		{
-			free (buffer);
-			return (NULL);
-		}
 		if (bytes_read == 0)
-		{
-			free (list);
-			free(buffer);
-			return (NULL);
-		}
-		buffer[bytes_read] = '\0';
+			break;
+		old_list = list;
 		list = ft_strjoin (list, buffer);
-		if (ft_strchr(buffer, '\n'))
+		free (old_list);
+		if ((ft_strchr(buffer, '\n')))
 			break ;
-		free (buffer);
 	}
 	free (buffer);
 	return (list);

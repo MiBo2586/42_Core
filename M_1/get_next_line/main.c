@@ -16,9 +16,15 @@ int	main(void)
 	int		fd;
 	char	*the_line;
 
-	fd = open ("test.txt", O_RDWR | O_CREAT);
-	write (1, "a", 1);
+	fd = open ("test", O_RDWR | O_CREAT);
 	the_line = get_next_line (fd);
-	printf("This is the line:\n%s\n", the_line);
+	printf("This is the line:|%s|\n", the_line);
+	free (the_line);
+	the_line = get_next_line (fd);
+	printf("This is the line:|%s|\n", the_line);
+	free (the_line);
+	the_line = get_next_line (fd);
+	printf("This is the line:|%s|\n", the_line);
+	free (the_line);
 	return (0);
 }

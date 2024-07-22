@@ -30,5 +30,6 @@ char	*read_list(char *list, int fd);
 char	*ft_strcat_line(char *s1, char c);
 char	*get_next_line(int fd);
 void	ft_bzero(void *s, size_t n);
+char	*ft_strcpy(char *new_line, char *s1, char *s2);
 
 #endif

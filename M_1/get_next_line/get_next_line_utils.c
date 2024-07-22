@@ -12,6 +12,33 @@
 
 #include "get_next_line.h"
 
+char	*ft_strcpy(char *new_line, char *s1, char *s2)
+{
+	int		i;
+	int		l;
+
+	i = 0;
+	l = 0;
+	if (s1)
+	{
+		while (s1[l])
+		{
+			new_line[l] = s1[l];
+			l++;
+		}
+	}
+	if (s2)
+	{
+		while (s2[i])
+		{
+			new_line [l + i] = s2[i];
+			i++;
+		}
+	}
+	new_line [l + i] = '\0';
+	return (new_line);
+}
+
 void	ft_bzero(void *s, size_t n)
 {
 	char	*str;
@@ -52,61 +79,16 @@ char	*ft_strchr(char *s, int c)
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	int		buffer;
 	char	*new_line;
-	int		i;
-	int		l;
+	int		buffer;
 
-	i = 0;
-	l = 0;
 	buffer = ft_strlen(s1) + ft_strlen(s2);
 	if (buffer == 0)
 		return (NULL);
 	new_line = (char *)malloc(sizeof(char) * (buffer + 1));
 	if (!new_line)
 		return (NULL);
-	if (s1)
-	{
-		while (s1[l])
-		{
-			new_line[l] = s1[l];
-			l++;
-		}
-	}
-	if (s2)
-	{
-		while (s2[i])
-		{
-			new_line [l + i] = s2[i];
-			i++;
-		}
-	}
-	new_line [l + i] = '\0';
+	new_line = ft_strcpy(new_line, s1, s2);
 	return (new_line);
 }
 
-char	*read_list(char *list, int fd)
-{
-	char	*buffer;
-	int		bytes_read;
-	char 	*old_list;
-
-	bytes_read = 1;
-	buffer = (char *)malloc(BUFFER_SIZE + 1);
-	if (!buffer)
-		return (list);
-	while (bytes_read > 0)
-	{
-		ft_bzero(buffer, BUFFER_SIZE + 1);
-		bytes_read = read (fd, buffer, BUFFER_SIZE);
-		if (bytes_read == 0)
-			break;
-		old_list = list;
-		list = ft_strjoin (list, buffer);
-		free (old_list);
-		if ((ft_strchr(buffer, '\n')))
-			break ;
-	}
-	free (buffer);
-	return (list);
-}

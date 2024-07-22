@@ -11,7 +11,23 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+/*
+int	ft_initial (char *s1, char c)
+{
+	int i;
 
+	i = 0;
+	while (s1[i] != c)
+	{
+		if (s1[i] == '\0')
+		{
+			free(s1);
+			return (NULL);
+		}
+		i++;
+	}
+}
+*/
 char	*ft_strcat_line(char *s1, char c)
 {
 	int		count;
@@ -46,13 +62,6 @@ static char	*ft_strcat_nextline(char *s1, char c)
 	count = 0;
 	i = 0;
 	j = 0;
-	if (s1 == NULL) // mozna?
-		return (NULL); // mozna?
-	// if (s1[0] == c && (s1[1] == '\0' || s1[1] == c))
-	// {
-	// 	free (s1);
-	// 	return (NULL);
-	// }
 	while (s1[i] != c)
 	{
 		if (s1[i] == '\0')
@@ -62,13 +71,9 @@ static char	*ft_strcat_nextline(char *s1, char c)
 		}
 		i++;
 	}
+	// nahodit to predchozi while za ft_initial
+	
 	i++;
-	/*if (i <= 2)
-	{
-		free (s1);
-		return (NULL);
-	}
-	*/
 	while (s1[i + count])
 		count++;
 	if (count == 0)
@@ -88,6 +93,32 @@ static char	*ft_strcat_nextline(char *s1, char c)
 	next_line[j] = '\0';
 	free (s1);
 	return (next_line);
+}
+
+char	*read_list(char *list, int fd)
+{
+	char	*buffer;
+	int		bytes_read;
+	char 	*old_list;
+
+	bytes_read = 1;
+	buffer = (char *)malloc(BUFFER_SIZE + 1);
+	if (!buffer)
+		return (list);
+	while (bytes_read > 0)
+	{
+		ft_bzero(buffer, BUFFER_SIZE + 1);
+		bytes_read = read (fd, buffer, BUFFER_SIZE);
+		if (bytes_read == 0)
+			break ;
+		old_list = list;
+		list = ft_strjoin (list, buffer);
+		free (old_list);
+		if ((ft_strchr(buffer, '\n')))
+			break ;
+	}
+	free (buffer);
+	return (list);
 }
 
 char	*get_next_line(int fd)

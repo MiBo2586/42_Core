@@ -23,6 +23,11 @@ int	main(void)
 	the_line = get_next_line (fd);
 	printf("This is the line:|%s|\n", the_line);
 	free (the_line);
+	close (fd);
+	fd = open ("test", O_RDWR | O_CREAT);
+	the_line = get_next_line (fd);
+	printf("This is the line:|%s|\n", the_line);
+	free (the_line);
 	the_line = get_next_line (fd);
 	printf("This is the line:|%s|\n", the_line);
 	free (the_line);

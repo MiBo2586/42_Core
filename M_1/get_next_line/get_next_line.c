@@ -30,7 +30,7 @@ char	*ft_strcat_line(char *s1, char c)
 		the_line[i] = s1[i];
 		i++;
 	}
-	the_line[i] = '\0';
+	the_line[i] = '\n';
 	return (the_line);
 }
 
@@ -57,7 +57,7 @@ static char	*ft_strcat_nextline(char *s1, char c)
 		j++;
 		i++;
 	}
-	next_line[j] = '\0';
+	next_line[j] = '\n';
 	return (next_line);
 }
 
@@ -66,11 +66,11 @@ char	*get_next_line(int fd)
 	static char		*list;
 	char			*the_line;
 
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0 || !fd)
+		return (NULL);
 	if (!list)
 		list = (char *)malloc(1);
 	list[0] = '\0';
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
-		return (NULL);
 	list = read_list(list, fd);
 	if (!list)
 		return (NULL);

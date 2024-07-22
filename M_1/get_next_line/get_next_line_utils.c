@@ -60,7 +60,10 @@ char	*ft_strjoin(char *s1, char *s2)
 	buffer = ft_strlen(s1) + ft_strlen(s2);
 	new_line = (char *)malloc(sizeof(char) * (buffer + 1));
 	if (!new_line || !s1 || !s2)
+	{	
+		free (new_line);
 		return (NULL);
+	}
 	while (s1[l])
 	{
 		new_line[l] = s1[l];
@@ -80,25 +83,31 @@ char	*read_list(char *list, int fd)
 	char	*buffer;
 	int		bytes_read;
 
-
-	buffer = (char *)malloc(BUFFER_SIZE + 1);
-	if (!buffer)
-		return (NULL);
 	bytes_read = 1;
-	while (bytes_read >= 0)
+	while (bytes_read > 0)
 	{
+		buffer = (char *)malloc(BUFFER_SIZE + 1);
+		if (!buffer)
+			return (NULL);
 		ft_bzero(buffer, BUFFER_SIZE + 1);
 		bytes_read = read (fd, buffer, BUFFER_SIZE);
+		if (!buffer)
+		{
+			free (buffer);
+			return (NULL);
+		}
 		if (bytes_read == 0)
 		{
-			free(buffer);
 			free (list);
+			free(buffer);
 			return (NULL);
 		}
 		buffer[bytes_read] = '\0';
 		list = ft_strjoin (list, buffer);
 		if (ft_strchr(buffer, '\n'))
 			break ;
+		free (buffer);
 	}
+	free (buffer);
 	return (list);
 }

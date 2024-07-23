@@ -105,15 +105,15 @@ char	*read_list(char *list, int fd)
 
 char	*get_next_line(int fd)
 {
-	static char		*list;
+	static char		*list[1024];
 	char			*the_line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	list = read_list(list, fd);
-	if (!list)
+	list[fd] = read_list(list[fd], fd);
+	if (!list[fd])
 		return (NULL);
-	the_line = ft_strcat_line(list, '\n');
-	list = ft_strcat_nextline(list, '\n');
+	the_line = ft_strcat_line(list[fd], '\n');
+	list[fd] = ft_strcat_nextline(list[fd], '\n');
 	return (the_line);
 }

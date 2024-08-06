@@ -1,0 +1,20 @@
+guide to B2BR:
+https://github.com/gemartin99/Born2beroot-Tutorial/blob/main/README_EN.md#1--download-the-virtual-machine-iso-
+
+root_user: mborovka42
+password for root: Btbr42prg
+
+user_name: mborovka
+user_password: 42prg
+
+encryption_password: Btbr42prg
+
+Done till the 4.3 INstalling & configuring UFW
+ - once all on the original page finished then open this website
+ 
+ https://github.com/gemartin99/Born2beroot-Tutorial/blob/main/README_EN.md#8--bonus-%EF%B8%8F
+ and do bonus from 8.2 Wordpress & service configuration
+ 
+ 
+ Openlitespeed installation
+ https://www.digitalocean.com/community/tutorials/how-to-install-the-openlitespeed-web-server-on-ubuntu-20-04

@@ -93,11 +93,12 @@ char	**ft_split(char const *s, char c)
 	size_t	n;
 	size_t	i;
 
-	i = 0;
+	i = 1;
 	n = 0;
-	thewhole = (char **)malloc(sizeof(char *) * (ft_wordcount(s, c) + 1));
+	thewhole = (char **)malloc(sizeof(char *) * (ft_wordcount(s, c) + 2));
 	if (!thewhole)
 		return (0);
+	thewhole[0] = NULL; //added due to the adjustment of argc when to argument to be the same as more than 2
 	while (*s)
 	{
 		while (*s == c && *s)

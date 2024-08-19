@@ -13,6 +13,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stddef.h>
+#include <stdbool.h>
+#include <unistd.h>
+
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
@@ -32,5 +35,12 @@ char	*ft_strchr(const char *s, int c);
 int	ft_wordcount(char const *s, char c);
 char	**ft_split(char const *s, char c);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
+void    stack_init(node_t **a, char **argv);
+long	ft_atol(const char *nptr);
+void    append_node (node_t **stack, int nbr);
+node_t *find_last_node(node_t *stack);
+bool    stack_sorted(node_t *node);
+
+
 #endif
 
